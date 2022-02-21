@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const LoadBtn = styled.button`
+  width: 200px;
+  margin: 0 auto;
   padding: 8px 16px;
   border-radius: 2px;
   background-color: #3f51b5;
@@ -9,6 +11,7 @@ export const LoadBtn = styled.button`
   display: inline-block;
   color: #fff;
   border: 0;
+  border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
   font-family: inherit;

@@ -1,8 +1,14 @@
 import { Header, Form, Label, SearchBtn, Input } from "./searchbar.styled";
 import React, { Component } from "react";
 import { VscSearch } from "react-icons/vsc";
+import { toast } from "react-toastify";
+import PropTypes from "prop-types";
 
 export default class Searchbar extends Component {
+  static defaultProps = {
+    onSubmit: PropTypes.func,
+  };
+
   state = {
     value: "",
   };
@@ -14,7 +20,10 @@ export default class Searchbar extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    if (this.state.value.trim() === "") {
+      toast.error("Введите значение");
+      return;
+    }
     this.props.onSubmit(this.state);
     this.reset();
   };
