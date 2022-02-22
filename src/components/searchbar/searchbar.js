@@ -14,8 +14,7 @@ export default class Searchbar extends Component {
   };
 
   handleInputChange = (e) => {
-    const { value } = e.currentTarget;
-    this.setState({ value });
+    this.setState({ value: e.currentTarget.value.toLowerCase() });
   };
 
   handleSubmit = (e) => {
@@ -24,7 +23,7 @@ export default class Searchbar extends Component {
       toast.error("Введите значение");
       return;
     }
-    this.props.onSubmit(this.state);
+    this.props.onSubmit(this.state.value);
     this.reset();
   };
 

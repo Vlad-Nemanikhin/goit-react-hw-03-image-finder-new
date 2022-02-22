@@ -5,11 +5,11 @@ import React, { Component } from "react";
 
 export default class App extends Component {
   state = {
-    title: "",
+    value: "",
   };
 
   formSubmitHandler = (value) => {
-    this.setState({ title: value });
+    this.setState({ value });
   };
 
   render() {
@@ -17,7 +17,7 @@ export default class App extends Component {
       <div className="App">
         <Searchbar onSubmit={this.formSubmitHandler} />
 
-        <Gallery title={this.state.title} />
+        <Gallery title={this.state.value} />
       </div>
     );
   }

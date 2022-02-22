@@ -21,14 +21,15 @@ export default class ImageGallery extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { title } = this.props;
     const { page } = this.state;
 
     if (prevProps.title !== this.props.title) {
+      console.log(prevProps.title);
+      console.log(this.props.title);
       this.setState({ images: [] });
       this.setState({ page: 1 });
       this.setState({ loading: true });
-      getImg(title, page)
+      getImg(this.props.title, page)
         .then((r) => r.json())
         .then(({ hits }) => this.setState({ images: hits }))
         .finally(() => {
@@ -37,7 +38,7 @@ export default class ImageGallery extends Component {
     }
 
     if (prevState.page !== this.state.page) {
-      getImg(title, page)
+      getImg(this.props.title, page)
         .then((r) => r.json())
         .then(({ hits }) =>
           this.setState({ images: [...prevState.images, ...hits] })
