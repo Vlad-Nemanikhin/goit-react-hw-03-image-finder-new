@@ -12,7 +12,6 @@ export default class Btn extends Component {
   };
 
   componentDidMount() {
-    console.log(this.state);
     this.updatePage();
   }
 
@@ -21,7 +20,6 @@ export default class Btn extends Component {
   };
 
   handleClick = (e) => {
-    //console.log(e.currentTarget === e.target)
     this.setState((prevState) => ({ page: prevState.page + 1 }));
     this.props.onClick(this.state.page);
     window.scrollTo({

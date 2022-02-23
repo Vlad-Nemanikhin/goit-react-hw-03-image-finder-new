@@ -34,7 +34,7 @@ export default class Modal extends Component {
   };
   render() {
     return createPortal(
-      <Overlay>
+      <Overlay onClick={this.handleClickModal}>
         <ModalMarkup>
           <img src={this.props.selectedImage} alt="" />
         </ModalMarkup>

@@ -6,6 +6,7 @@ import Modal from "../modal/modal";
 import { ImageItem } from "../imageGalleryItem/imageGalleryItem";
 import Spin from "../loader/loader";
 import PropTypes from "prop-types";
+import { v4 as uuidv4 } from "uuid";
 
 export default class ImageGallery extends Component {
   static defaultProps = {
@@ -24,11 +25,7 @@ export default class ImageGallery extends Component {
     const { page } = this.state;
 
     if (prevProps.title !== this.props.title) {
-      console.log(prevProps.title);
-      console.log(this.props.title);
-      this.setState({ images: [] });
-      this.setState({ page: 1 });
-      this.setState({ loading: true });
+      this.setState({ images: [], page: 1, loading: true });
       getImg(this.props.title, page)
         .then((r) => r.json())
         .then(({ hits }) => this.setState({ images: hits }))
@@ -44,7 +41,6 @@ export default class ImageGallery extends Component {
           this.setState({ images: [...prevState.images, ...hits] })
         );
     }
-    //console.log(this.state.images)
   }
 
   loadBtnHandler = (newPage) => {
@@ -71,7 +67,15 @@ export default class ImageGallery extends Component {
       <>
         {loading && <Spin />}
         <Gallery>
-          <ImageItem images={images} selectImage={this.selectImage} />
+          {images.map(({ webformatURL, tags, largeImageURL }) => (
+            <ImageItem
+              key={uuidv4()}
+              source={webformatURL}
+              name={tags}
+              sourceLarge={largeImageURL}
+              onSelectImg={this.selectImage}
+            />
+          ))}
         </Gallery>
         {images.length > 0 ? <Btn onClick={this.loadBtnHandler} /> : null}
         {showModal && (

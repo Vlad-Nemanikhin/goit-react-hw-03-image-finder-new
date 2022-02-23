@@ -1,20 +1,21 @@
 import { Image, Card } from "./imageGalleryItem.styled";
 import PropTypes from "prop-types";
 
-export const ImageItem = ({ images, selectImage }) => {
-  return images.map(({ webformatURL, tags, largeImageURL }, idx) => (
+export const ImageItem = ({ source, name, sourceLarge, onSelectImg }) => {
+  return (
     <Card
       onClick={() => {
-        selectImage(largeImageURL);
+        onSelectImg(sourceLarge);
       }}
-      key={idx}
     >
-      <Image src={webformatURL} alt={tags} />
+      <Image src={source} alt={name} />
     </Card>
-  ));
+  );
 };
 
 ImageItem.propTypes = {
-  images: PropTypes.array.isRequired,
-  selectImage: PropTypes.func.isRequired,
+  webformatURL: PropTypes.string,
+  largeImageURL: PropTypes.string,
+  tags: PropTypes.string,
+  onSelectImg: PropTypes.func,
 };
